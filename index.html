@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="アイグローブ株式会社は、東京都豊島区を拠点に建築設計・施工・リフォームを手がける建築のプロフェッショナルです。">
+    <title>アイグローブ株式会社 | 建築設計・施工・リフォーム</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS Variables & Reset
+        ============================================ */
+        :root {
+            --color-primary:    #d97706;   /* amber-600 */
+            --color-primary-dk: #b45309;   /* amber-700 */
+            --color-dark:       #0f172a;   /* slate-900 */
+            --color-dark-2:     #1e293b;   /* slate-800 */
+            --color-dark-3:     #334155;   /* slate-700 */
+            --color-text:       #1e293b;   /* slate-800 */
+            --color-muted:      #64748b;   /* slate-500 */
+            --color-light:      #f8fafc;   /* slate-50  */
+            --color-white:      #ffffff;
+            --color-border:     #e2e8f0;   /* slate-200 */
+            --font-sans:        'Noto Sans JP', sans-serif;
+            --font-en:          'Montserrat', sans-serif;
+            --nav-height:       80px;
+            --transition:       0.3s ease;
+            --radius:           4px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            background-color: var(--color-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ============================================
+           Utility Classes
+        ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-label {
+            font-family: var(--font-en);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 32px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--color-primary);
+        }
+
+        .section-title--center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .fade-in-delay-4 { transition-delay: 0.4s; }
+
+        /* ============================================
+           Navigation
+        ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            height: var(--nav-height);
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
+            transition: box-shadow var(--transition), background var(--transition);
+        }
+
+        .nav.scrolled {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        /* Logo */
+        .nav__logo {
+            font-family: var(--font-en);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--color-dark);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .nav__logo-dot {
+            color: var(--color-primary);
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        /* Desktop Links */
+        .nav__links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav__link {
+            font-family: var(--font-en);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            color: var(--color-dark);
+            position: relative;
+            padding-bottom: 4px;
+            transition: color var(--transition);
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            transition: width var(--transition);
+        }
+
+        .nav__link:hover {
+            color: var(--color-primary);
+        }
+
+        .nav__link:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger */
+        .nav__hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+            z-index: 1100;
+        }
+
+        .nav__hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-dark);
+            border-radius: 2px;
+            transition: transform var(--transition), opacity var(--transition);
+        }
+
+        .nav__hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav__hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav__hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Mobile Drawer */
+        .nav__drawer {
+            display: none;
+            position: fixed;
+            top: var(--nav-height);
+            left: 0;
+            width: 100%;
+            background: var(--color-white);
+            border-top: 1px solid var(--color-border);
+            padding: 24px;
+            flex-direction: column;
+            gap: 0;
+            z-index: 999;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: transform var(--transition), opacity var(--transition);
+        }
+
+        .nav__drawer.open {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .nav__drawer-link {
+            font-family: var(--font-en);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            color: var(--color-dark);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--color-border);
+            display: block;
+            transition: color var(--transition);
+        }
+
+        .nav__drawer-link:last-child {
+            border-bottom: none;
+        }
+
+        .nav__drawer-link:hover {
+            color: var(--color-primary);
+        }
+
+        /* ============================================
+           Hero Section
+        ============================================ */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: var(--color-dark);
+        }
+
+        .hero__bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1503387762-592dea58ef23?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            transform: scale(1.05);
+            transition: transform 8s ease;
+        }
+
+        .hero__bg.loaded {
+            transform: scale(1);
+        }
+
+        .hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(15, 23, 42, 0.5) 0%,
+                rgba(15, 23, 42, 0.6) 60%,
+                rgba(15, 23, 42, 0.85) 100%
+            );
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: var(--color-white);
+            padding: 0 24px;
+            max-width: 900px;
+        }
+
+        .hero__eyebrow {
+            font-family: var(--font-en);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            opacity: 0.75;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .hero__title {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 28px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+
+        .hero__desc {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            font-weight: 300;
+            line-height: 1.9;
+            opacity: 0.9;
+            margin-bottom: 48px;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero__buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            border-radius: var(--radius);
+            transition: all var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn--primary {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+
+        .btn--primary:hover {
+            background-color: var(--color-primary-dk);
+            border-color: var(--color-primary-dk);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(217, 119, 6, 0.35);
+        }
+
+        .btn--outline-white {
+            background-color: transparent;
+            color: var(--color-white);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .btn--outline-white:hover {
+            background-color: var(--color-white);
+            color: var(--color-dark);
+            border-color: var(--color-white);
+            transform: translateY(-2px);
+        }
+
+        /* Scroll indicator */
+        .hero__scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.5);
+            font-family: var(--font-en);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+        }
+
+        .hero__scroll-line {
+            width: 1px;
+            height: 48px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollLine {
+            0%, 100% { opacity: 0.5; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(0.6); }
+        }
+
+        /* ============================================
+           Vision Section
+        ============================================ */
+        .vision {
+            padding: 120px 0;
+            background-color: var(--color-white);
+        }
+
+        .vision__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .vision__text p {
+            color: var(--color-muted);
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .vision__text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .vision__text h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .vision__image-wrap {
+            position: relative;
+        }
+
+        .vision__image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: var(--radius);
+            box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+        }
+
+        .vision__badge {
+            position: absolute;
+            bottom: -24px;
+            left: -24px;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: 28px 32px;
+        }
+
+        .vision__badge-num {
+            font-family: var(--font-en);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            display: block;
+        }
+
+        .vision__badge-text {
+            font-family: var(--font-en);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            opacity: 0.85;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* ============================================
+           Services Section
+        ============================================ */
+        .services {
+            padding: 120px 0;
+            background-color: var(--color-dark);
+            color: var(--color-white);
+        }
+
+        .services__header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .services__header .section-title {
+            color: var(--color-white);
+            display: inline-block;
+        }
+
+        .services__header p {
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        .services__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .service-card {
+            background-color: var(--color-dark-2);
+            padding: 48px 40px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background-color: var(--color-primary);
+            transition: height 0.4s ease;
+        }
+
+        .service-card:hover {
+            background-color: var(--color-dark-3);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+        }
+
+        .service-card:hover::before {
+            height: 100%;
+        }
+
+        .service-card__icon {
+            width: 64px;
+            height: 64px;
+            background-color: var(--color-primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            transition: transform var(--transition);
+        }
+
+        .service-card:hover .service-card__icon {
+            transform: scale(1.1);
+        }
+
+        .service-card__icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--color-white);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .service-card p {
+            color: #94a3b8;
+            line-height: 1.85;
+            font-size: 0.95rem;
+        }
+
+        .service-card__list {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .service-card__list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+
+        .service-card__list li::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           Company Section
+        ============================================ */
+        .company {
+            padding: 120px 0;
+            background-color: var(--color-white);
+        }
+
+        .company__grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .company__intro p {
+            color: var(--color-muted);
+            line-height: 1.85;
+            margin-top: 16px;
+        }
+
+        .company__table {
+            border-top: 1px solid var(--color-border);
+        }
+
+        .company__row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 24px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--color-border);
+            align-items: start;
+        }
+
+        .company__row-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--color-muted);
+            letter-spacing: 0.05em;
+            padding-top: 2px;
+        }
+
+        .company__row-value {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-dark);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           Footer
+        ============================================ */
+        .footer {
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            padding: 64px 0 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .footer__inner {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+
+        .footer__top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer__brand {}
+
+        .footer__logo {
+            font-family: var(--font-en);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--color-white);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            margin-bottom: 12px;
+        }
+
+        .footer__logo-dot {
+            color: var(--color-primary);
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .footer__tagline {
+            font-size: 0.8rem;
+            color: #64748b;
+            line-height: 1.6;
+            max-width: 280px;
+        }
+
+        .footer__nav {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .footer__nav-link {
+            font-family: var(--font-en);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            color: #94a3b8;
+            transition: color var(--transition);
+        }
+
+        .footer__nav-link:hover {
+            color: var(--color-white);
+        }
+
+        .footer__bottom {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer__copy {
+            font-size: 0.75rem;
+            color: #475569;
+        }
+
+        .footer__address {
+            font-size: 0.75rem;
+            color: #475569;
+            text-align: right;
+        }
+
+        /* ============================================
+           Responsive
+        ============================================ */
+        @media (max-width: 900px) {
+            .nav__links {
+                display: none;
+            }
+
+            .nav__hamburger {
+                display: flex;
+            }
+
+            .nav__drawer {
+                display: flex;
+            }
+
+            .vision__grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .vision__badge {
+                display: none;
+            }
+
+            .services__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .company__grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .company__row {
+                grid-template-columns: 120px 1fr;
+            }
+
+            .footer__top {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer__address {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero__title {
+                font-size: 1.9rem;
+            }
+
+            .btn {
+                padding: 14px 24px;
+                font-size: 0.8rem;
+            }
+
+            .company__row {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         Navigation
+    ============================================ -->
+    <nav class="nav" id="nav" role="navigation" aria-label="メインナビゲーション">
+        <div class="container nav__inner">
+            <!-- Logo -->
+            <a href="#home" class="nav__logo" aria-label="アイグローブ株式会社 トップへ">
+                iGLOBE<span class="nav__logo-dot">.</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <ul class="nav__links" role="list">
+                <li><a href="#home"     class="nav__link">HOME</a></li>
+                <li><a href="#vision"   class="nav__link">VISION</a></li>
+                <li><a href="#services" class="nav__link">SERVICES</a></li>
+                <li><a href="#company"  class="nav__link">COMPANY</a></li>
+            </ul>
+
+            <!-- Hamburger Button -->
+            <button class="nav__hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div class="nav__drawer" id="drawer" role="menu">
+            <a href="#home"     class="nav__drawer-link" role="menuitem">HOME</a>
+            <a href="#vision"   class="nav__drawer-link" role="menuitem">VISION</a>
+            <a href="#services" class="nav__drawer-link" role="menuitem">SERVICES</a>
+            <a href="#company"  class="nav__drawer-link" role="menuitem">COMPANY</a>
+        </div>
+    </nav>
+
+
+    <!-- ============================================
+         Hero Section
+    ============================================ -->
+    <section id="home" class="hero" aria-label="ヒーローセクション">
+        <div class="hero__bg" id="heroBg"></div>
+        <div class="hero__overlay"></div>
+
+        <div class="hero__content">
+            <span class="hero__eyebrow fade-in">Architectural Excellence</span>
+            <h1 class="hero__title fade-in fade-in-delay-1">
+                想いを形に、<br>
+                理想の空間を創造する。
+            </h1>
+            <p class="hero__desc fade-in fade-in-delay-2">
+                アイグローブ株式会社は、建築設計から施工、リフォームまで、<br>
+                確かな技術力でお客様のビジネスと暮らしの基盤を支えます。
+            </p>
+            <div class="hero__buttons fade-in fade-in-delay-3">
+                <a href="#services" class="btn btn--primary">事業内容を見る</a>
+                <a href="#company"  class="btn btn--outline-white">会社概要</a>
+            </div>
+        </div>
+
+        <div class="hero__scroll" aria-hidden="true">
+            <div class="hero__scroll-line"></div>
+            <span>SCROLL</span>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         Vision Section
+    ============================================ -->
+    <section id="vision" class="vision" aria-label="ビジョン">
+        <div class="container">
+            <div class="vision__grid">
+                <!-- Text -->
+                <div class="vision__text">
+                    <span class="section-label fade-in">Our Vision</span>
+                    <h2 class="section-title fade-in">VISION</h2>
+                    <h3 class="fade-in">「確かな品質で、次世代へと繋ぐ。」</h3>
+                    <p class="fade-in">
+                        私たちは、平成15年の設立以来、東京都豊島区を拠点に建築のプロフェッショナルとして歩んできました。建築とは単に建物を建てることではなく、そこで営まれる人々の生活やビジネスの「質」を設計することだと考えています。
+                    </p>
+                    <p class="fade-in">
+                        アイグローブ株式会社は、伝統的な施工技術と現代のニーズを融合させ、機能美と耐久性を兼ね備えた空間を提供し続けます。代表の乾一郎をはじめ、スタッフ一同が責任を持って現場に向き合い、お客様の信頼に応えます。
+                    </p>
+                </div>
+
+                <!-- Image -->
+                <div class="vision__image-wrap fade-in">
+                    <img
+                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                        alt="近代的なオフィスビルの外観"
+                        class="vision__image"
+                        loading="lazy"
+                    >
+                    <div class="vision__badge" aria-label="創業20年以上">
+                        <span class="vision__badge-num">20+</span>
+                        <span class="vision__badge-text">Years Experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         Services Section
+    ============================================ -->
+    <section id="services" class="services" aria-label="サービス">
+        <div class="container">
+            <div class="services__header">
+                <span class="section-label fade-in" style="color: var(--color-primary);">What We Do</span>
+                <h2 class="section-title section-title--center fade-in" style="color: var(--color-white); display: inline-block;">SERVICES</h2>
+                <p class="fade-in">建築の川上から川下まで、トータルでサポートいたします。</p>
+            </div>
+
+            <div class="services__grid">
+                <!-- Service 1 -->
+                <div class="service-card fade-in">
+                    <div class="service-card__icon" aria-hidden="true">
+                        <!-- Building icon -->
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3>建築工事設計・請負及び施工</h3>
+                    <p>
+                        小規模な商業施設から住宅、オフィスビルまで、多様な建築ニーズに対応。土地の特性を活かした設計プランの提案から、責任を持って現場を管理する施工までを一貫して請け負います。
+                    </p>
+                    <ul class="service-card__list">
+                        <li>新規建築設計・コンサルティング</li>
+                        <li>各種建築工事の請負・監理</li>
+                        <li>構造計画・安全基準への適合</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card fade-in fade-in-delay-2">
+                    <div class="service-card__icon" aria-hidden="true">
+                        <!-- Pencil/edit icon -->
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3>リフォーム工事の請負及び施工</h3>
+                    <p>
+                        既存の建物の魅力を最大限に引き出し、新たな価値を吹き込みます。内装の刷新、設備の最新化、バリアフリー対応など、ライフスタイルやビジネス環境の変化に合わせた最適な改修を提案します。
+                    </p>
+                    <ul class="service-card__list">
+                        <li>住宅・店舗・オフィスの全面改装</li>
+                        <li>間取り変更・構造補強リフォーム</li>
+                        <li>水回り・断熱改修等の部分リフォーム</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         Company Profile Section
+    ============================================ -->
+    <section id="company" class="company" aria-label="会社概要">
+        <div class="container">
+            <div class="company__grid">
+                <!-- Intro -->
+                <div class="company__intro">
+                    <span class="section-label fade-in">About Us</span>
+                    <h2 class="section-title fade-in">COMPANY</h2>
+                    <p class="fade-in">
+                        アイグローブ株式会社は、地域に根差し、お客様と共に歩む建築パートナーです。確かな歴史と資本力で、安定したサービスを提供いたします。
+                    </p>
+                </div>
+
+                <!-- Table -->
+                <div class="company__table fade-in" role="table" aria-label="会社情報">
+                    <div class="company__row" role="row">
+                        <span class="company__row-label" role="rowheader">社名</span>
+                        <span class="company__row-value" role="cell">アイグローブ株式会社</span>
+                    </div>
+                    <div class="company__row" role="row">
+                        <span class="company__row-label" role="rowheader">代表者</span>
+                        <span class="company__row-value" role="cell">乾 一郎</span>
+                    </div>
+                    <div class="company__row" role="row">
+                        <span class="company__row-label" role="rowheader">設立</span>
+                        <span class="company__row-value" role="cell">平成15年11月5日（2003年）</span>
+                    </div>
+                    <div class="company__row" role="row">
+                        <span class="company__row-label" role="rowheader">資本金</span>
+                        <span class="company__row-value" role="cell">1,000万円</span>
+                    </div>
+                    <div class="company__row" role="row">
+                        <span class="company__row-label" role="rowheader">所在地</span>
+                        <span class="company__row-value" role="cell">
+                            〒170-0001<br>
+                            東京都豊島区西巣鴨2-17-22
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         Footer
+    ============================================ -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__top">
+                    <!-- Brand -->
+                    <div class="footer__brand">
+                        <div class="footer__logo">
+                            iGLOBE<span class="footer__logo-dot">.</span>
+                        </div>
+                        <p class="footer__tagline">
+                            建築設計・施工・リフォームを通じて、<br>
+                            人々の暮らしとビジネスの基盤を支えます。
+                        </p>
+                    </div>
+
+                    <!-- Nav -->
+                    <nav aria-label="フッターナビゲーション">
+                        <ul class="footer__nav" role="list">
+                            <li><a href="#home"     class="footer__nav-link">HOME</a></li>
+                            <li><a href="#vision"   class="footer__nav-link">VISION</a></li>
+                            <li><a href="#services" class="footer__nav-link">SERVICES</a></li>
+                            <li><a href="#company"  class="footer__nav-link">COMPANY</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="footer__bottom">
+                    <p class="footer__copy">
+                        &copy; 2025 iGLOBE Co., Ltd. All Rights Reserved.
+                    </p>
+                    <address class="footer__address" style="font-style: normal;">
+                        〒170-0001 東京都豊島区西巣鴨2-17-22
+                    </address>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ============================================
+         JavaScript
+    ============================================ -->
+    <script>
+        'use strict';
+
+        /* ------------------------------------------
+           Navbar: scroll shadow & active state
+        ------------------------------------------ */
+        const nav = document.getElementById('nav');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }, { passive: true });
+
+        /* ------------------------------------------
+           Mobile Hamburger Menu
+        ------------------------------------------ */
+        const hamburger = document.getElementById('hamburger');
+        const drawer    = document.getElementById('drawer');
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = hamburger.classList.toggle('open');
+            drawer.classList.toggle('open', isOpen);
+            hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+        });
+
+        // Close drawer when a link is clicked
+        drawer.querySelectorAll('.nav__drawer-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                drawer.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.setAttribute('aria-label', 'メニューを開く');
+            });
+        });
+
+        /* ------------------------------------------
+           Hero background Ken Burns effect
+        ------------------------------------------ */
+        const heroBg = document.getElementById('heroBg');
+        window.addEventListener('load', () => {
+            heroBg.classList.add('loaded');
+        });
+
+        /* ------------------------------------------
+           Scroll Fade-in Animation (IntersectionObserver)
+        ------------------------------------------ */
+        const fadeEls = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        // Hero elements should be visible immediately
+        const heroFadeEls = document.querySelectorAll('.hero .fade-in');
+        heroFadeEls.forEach((el, i) => {
+            setTimeout(() => el.classList.add('visible'), 300 + i * 150);
+        });
+
+        // Other sections use IntersectionObserver
+        fadeEls.forEach(el => {
+            if (!el.closest('.hero')) {
+                observer.observe(el);
+            }
+        });
+    </script>
+
+</body>
+</html>
